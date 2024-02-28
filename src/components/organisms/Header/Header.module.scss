@@ -1,0 +1,9 @@
+@import "../../../styles/variables.scss";
+
+.header {
+  padding: 20px;
+  background-color: $background-primary;
+  color: $font-light;
+  text-transform: uppercase;
+  text-align: center;
+}
