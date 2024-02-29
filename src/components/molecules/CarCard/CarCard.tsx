@@ -14,7 +14,7 @@ interface Props {
 
 const CarCard: FC<Props> = ({ car, isEdit = true, isDelete = true }) => {
   return (
-    <Card className={s.card}>
+    <Card>
       {
         (isEdit || isDelete) &&
         <Card.Header className={s.cardHeader}>

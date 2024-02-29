@@ -7,6 +7,7 @@ import { CSSProperties, FC } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
+import s from "./CarCardWithRequest.module.scss";
 
 interface Props {
 

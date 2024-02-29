@@ -4,7 +4,6 @@ import Title from "@/components/atoms/Title/Title";
 import CarCard from "@/components/molecules/CarCard/CarCard";
 import Footer from "@/components/organisms/Footer/Footer";
 import Header from "@/components/organisms/Header/Header";
-import DeletePageButtons from "@/components/organisms/DeletePageButtons/DeletePageButtons";
 import Layout from "@/components/templates/Layout/Layout";
 import { useTypedSelector } from "@/store/hooks";
 import { INextPageWithLayout } from "@/types/INextPageWithLayout";
@@ -17,6 +16,7 @@ import CarCardWithRequest from "@/components/organisms/CarCardWithRequest/CarCar
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { CarActionType } from "@/types/CarActionTypes";
+import SingleCarItemWrapper from "@/components/templates/SingleCarItemWrapper/SingleCarItemWrapper";
 
 interface Props {
 
@@ -32,11 +32,11 @@ const DeletePage: INextPageWithLayout<Props> = ({ }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Stack gap={2} style={{ maxWidth: "500px", margin: "0 auto" }}>
+      <SingleCarItemWrapper>
         <Title style={{ textAlign: "center" }}>Delete page</Title>
-        <DeletePageButtons />
+        <Button as="a" href="/" style={{ marginRight: "auto" }}>Назад</Button>
         <CarCardWithRequest />
-      </Stack>
+      </SingleCarItemWrapper>
     </>
   )
 };
