@@ -6,6 +6,18 @@ const getCars = async () => {
   return cars;
 }
 
+const getCarById = async (id: number) => {
+  const { data: car } = await apiAxios.get<ICar>(`/cars/${id}`);
+  return car;
+}
+
+const deleteCar = async (id: number) => {
+  const { data: car } = await apiAxios.delete<ICar>(`/cars/${id}`);
+  return car;
+}
+
 export default {
-  getCars
+  getCars,
+  getCarById,
+  deleteCar
 }

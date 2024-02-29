@@ -13,7 +13,7 @@ const Layout: FC<Props> = ({ renderHeader, renderFooter, children }) => {
     <div className={s.layoutWrapper}>
       {renderHeader && renderHeader()}
       <main className={s.layoutMain}>
-        <Container>
+        <Container className={s.container}>
           {children}
         </Container>
       </main>

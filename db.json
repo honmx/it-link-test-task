@@ -1,7 +1,7 @@
 {
   "cars": [
     {
-      "id": 134,
+      "id": "134",
       "images": [
         "615edbad4c35b.png",
         "615edbad4c35c.png",
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "id": 135,
+      "id": "135",
       "images": [
         "615edbad4c35b.png"
       ],
@@ -58,11 +58,9 @@
       ]
     },
     {
-      "id": 136,
+      "id": "136",
       "images": [
-        "615edbad4c35b.png",
-        "615edbad4c35c.png",
-        "615edbad4c35d.png"
+        "615edbad4c35b.png"
       ],
       "name": "Volvo XC70, 2007",
       "description": "1973 года выпуска, в отличном состоянии. Пробег 200000 км.",
@@ -75,10 +73,18 @@
         "productionYear": 2007,
         "body": "body",
         "mileage": 200000
-      }
+      },
+      "options": [
+        {
+          "option_name": "Климат-контроль"
+        },
+        {
+          "option_name": "Кожаный руль"
+        }
+      ]
     },
     {
-      "id": 137,
+      "id": "137",
       "images": [
         "615edbad4c35b.png",
         "615edbad4c35d.png"

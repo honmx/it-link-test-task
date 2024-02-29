@@ -2,7 +2,8 @@ import { ICar } from "@/types/ICar";
 
 export enum CarActionTypes {
   SET_CARS = "SET_CARS",
-  CREATE_CAR = "CREATE_CAR"
+  CREATE_CAR = "CREATE_CAR",
+  DELETE_CAR = "DELETE_CAR"
 }
 
 export interface ISetCarsAction {
@@ -15,4 +16,9 @@ export interface ICreateCarAction {
   payload: ICar;
 }
 
-export type CarActionType = ISetCarsAction | ICreateCarAction;
+export interface IDeleteCarAction {
+  type: CarActionTypes.DELETE_CAR;
+  payload: number;
+}
+
+export type CarActionType = ISetCarsAction | ICreateCarAction | IDeleteCarAction;

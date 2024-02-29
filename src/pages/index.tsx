@@ -16,6 +16,7 @@ import { useTypedSelector } from "@/store/hooks";
 import Title from "@/components/atoms/Title/Title";
 import CarCardList from "@/components/organisms/CarCardList/CarCardList";
 import { Stack } from "react-bootstrap";
+import HomePageButtons from "@/components/organisms/HomePageButtons/HomePageButtons";
 
 interface Props {
   cars: ICar[];
@@ -39,6 +40,7 @@ const HomePage: INextPageWithLayout<Props> = ({ cars }) => {
       </Head>
       <Stack gap={2}>
         <Title style={{ textAlign: "center" }}>Home page</Title>
+        <HomePageButtons />
         <CarCardList />
       </Stack>
     </>

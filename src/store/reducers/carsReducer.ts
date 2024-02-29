@@ -16,6 +16,12 @@ export const carsReducer = (state = initialState, action: CarActionType): IState
         ...state,
         cars: action.payload
       }
+
+    case (CarActionTypes.DELETE_CAR):
+      return {
+        ...state,
+        cars: state.cars.filter(car => car.id !== action.payload)
+      }
   
     default:
       return state;

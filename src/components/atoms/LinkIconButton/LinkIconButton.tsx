@@ -1,4 +1,5 @@
-import { FC, PropsWithRef, ReactNode, RefObject, forwardRef } from "react";
+import Link from "next/link";
+import { FC, ReactNode } from "react";
 import { Button } from "react-bootstrap";
 
 interface Props {
@@ -8,11 +9,11 @@ interface Props {
 
 const LinkIconButton: FC<Props> = ({ href, icon }) => {
   return (
-    <a href={href}>
+    <Link href={href}>
       <Button size="sm">
         {icon}
       </Button>
-    </a>
+    </Link>
   )
 };
 
