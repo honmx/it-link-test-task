@@ -4,16 +4,13 @@ import { useTypedSelector } from "@/store/hooks";
 import CarCard from "@/components/molecules/CarCard/CarCard";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import { groupCarsBy } from "@/helpers/groupCarsBy";
+import { ICar } from "@/types/ICar";
 
 interface Props {
-
+  groupedCars: ICar[][];
 }
 
-const CarCardList: FC<Props> = ({ }) => {
-
-  const cars = useTypedSelector(state => state.cars.cars);
-
-  const groupedCars = groupCarsBy(cars, 3);
+const CarCardList: FC<Props> = ({ groupedCars }) => {
 
   return (
     <Container>

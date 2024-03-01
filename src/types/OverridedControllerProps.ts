@@ -1,6 +1,5 @@
-import { IFormInput } from "@/components/organisms/CarForm/CarForm";
 import { Control, ControllerProps, FieldValues } from "react-hook-form";
 
 export type OverridedControllerProps = {
-  control: Control<IFormInput>;
+  control: Control<any>;
 } & Omit<ControllerProps, "control" | "render">

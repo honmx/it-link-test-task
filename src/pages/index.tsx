@@ -17,6 +17,7 @@ import Title from "@/components/atoms/Title/Title";
 import CarCardList from "@/components/organisms/CarCardList/CarCardList";
 import { Stack } from "react-bootstrap";
 import HomePageButtons from "@/components/organisms/HomePageButtons/HomePageButtons";
+import { groupCarsBy } from "@/helpers/groupCarsBy";
 
 interface Props {
   cars: ICar[];
@@ -25,6 +26,9 @@ interface Props {
 const HomePage: INextPageWithLayout<Props> = ({ cars }) => {
 
   const dispatch: Dispatch<CarActionType> = useDispatch();
+
+  const carsFromStore = useTypedSelector(state => state.cars.cars);
+  const groupedCars = groupCarsBy(carsFromStore, 3);
 
   useEffect(() => {
     dispatch(setCars(cars));
@@ -41,7 +45,7 @@ const HomePage: INextPageWithLayout<Props> = ({ cars }) => {
       <Stack gap={2}>
         <Title style={{ textAlign: "center" }}>Home page</Title>
         <HomePageButtons />
-        <CarCardList />
+        <CarCardList groupedCars={groupedCars} />
       </Stack>
     </>
   )
