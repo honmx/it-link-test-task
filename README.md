@@ -1,5 +1,5 @@
-Как запустить проект:
+# Как запустить проект:
 
-npm i
-npm run start
-npm run server
+# npm i
+# npm run start
+# npm run server
