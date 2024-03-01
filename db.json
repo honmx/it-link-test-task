@@ -12,7 +12,6 @@
       "price": 1500000,
       "contacts": "seller@mail.ru",
       "technical_characteristics": {
-        "car_id": 45,
         "brand": "Volvo",
         "model": "XC70",
         "productionYear": 2007,
@@ -38,14 +37,13 @@
         "615edbad4c35b.png",
         "615edbad4c35b.png"
       ],
-      "name": "Volvo XC70, 2007",
+      "name": "Volvo XC80, 2007",
       "description": "1973 года выпуска, в отличном состоянии. Пробег 200000 км.",
       "price": 1500000,
       "contacts": "seller@mail.ru",
       "technical_characteristics": {
-        "car_id": 45,
         "brand": "Volvo",
-        "model": "XC70",
+        "model": "XC80",
         "productionYear": 2007,
         "body": "body",
         "mileage": 200000
@@ -69,9 +67,8 @@
       "name": "Volvo XC70, 2007",
       "description": "1973 года выпуска, в отличном состоянии. Пробег 200000 км.",
       "price": 1500000,
-      "contacts": "seller@mail.ru",
+      "contacts": "seller123@mail.ru",
       "technical_characteristics": {
-        "car_id": 45,
         "brand": "Volvo",
         "model": "XC70",
         "productionYear": 2007,
@@ -84,6 +81,9 @@
         },
         {
           "option_name": "Кожаный руль"
+        },
+        {
+          "option_name": "Центральный замок"
         }
       ]
     },
@@ -98,6 +98,33 @@
       "description": "1973 года выпуска, в отличном состоянии. Пробег 200000 км.",
       "price": 1500000,
       "contacts": "seller@mail.ru"
+    },
+    {
+      "id": "0205",
+      "options": [
+        {
+          "option_name": "option1"
+        },
+        {
+          "option_name": "option2"
+        }
+      ],
+      "technical_characteristics": {
+        "brand": "brand",
+        "model": "model",
+        "productionYear": 2018,
+        "body": "body",
+        "mileage": 50000
+      },
+      "contacts": "contacts@gmail.com",
+      "images": [
+        "image.jpg",
+        "image.jpg",
+        "image.jpg"
+      ],
+      "price": 1500,
+      "description": "car123",
+      "name": "car123"
     }
   ]
 }

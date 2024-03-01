@@ -15,15 +15,15 @@ interface Props {
 
 const CarCardWithRequest: FC<Props> = ({ }) => {
 
-  const { query, isReady } = useRouter();
-
-  const dispatch: Dispatch<CarActionType> = useDispatch();
+  const { query, isReady, push } = useRouter();
   
-  const { data: car, isLoading, error } = useRequest(() => carsService.getCarById(Number(query.id)), null, [isReady], !isReady);
+  const { data: car, isLoading, error } = useRequest(() => carsService.getCarById(query.id?.toString() as string), null, [isReady], !isReady || !query.id);
 
   const handleDeleteClick = async () => {
-    const car = await carsService.deleteCar(Number(query.id));
-    console.log(car);
+    if (!query.id) return;
+
+    await carsService.deleteCar(query.id?.toString());
+    push("/");
   }
 
   return (

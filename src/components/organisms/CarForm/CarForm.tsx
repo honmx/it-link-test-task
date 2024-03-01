@@ -9,13 +9,16 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { InferType } from "yup";
 import s from "./CarForm.module.scss";
+import { ICar } from "@/types/ICar";
+import { CarWithoutId } from "@/types/CarWithoutId";
+import { areTechnicalCharacteristicsFilled } from "@/helpers/areTechnicalCharacteristicsFilled";
 
 const applicationSchema = yup
   .object({
     name: yup.string().required(),
     description: yup.string().required(),
     price: yup.number().nullable().required(),
-    photos: yup.array().of(yup.string().min(1)).length(3).required(),
+    images: yup.array().of(yup.string().min(1)).length(3).required(),
     contacts: yup.string().required(),
     technical_characteristics: yup.object({
       brand: yup.string(),
@@ -31,10 +34,11 @@ const applicationSchema = yup
 export interface IFormInput extends InferType<typeof applicationSchema> { }
 
 interface Props {
-
+  car?: ICar;
+  requestFn: (car: CarWithoutId) => Promise<void>;
 }
 
-const CarForm: FC<Props> = ({ }) => {
+const CarForm: FC<Props> = ({ car, requestFn }) => {
 
   const {
     setError,
@@ -50,24 +54,23 @@ const CarForm: FC<Props> = ({ }) => {
     reValidateMode: "onBlur",
     shouldUnregister: true,
     defaultValues: {
-      // add props from passed car
-      name: "",
-      description: "",
-      photos: ["", "", ""],
+      name: car?.name || "",
+      description: car?.description || "",
+      price: car?.price || undefined,
+      images: car?.images || ["", "", ""],
+      contacts: car?.contacts || "",
+      technical_characteristics: car?.technical_characteristics || undefined,
+      options: car?.options || undefined,
     },
     resolver: yupResolver(applicationSchema)
   });
 
-  // add props from passed car
-  const [checked, setChecked] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(!!car?.technical_characteristics || false);
 
   useEffect(() => {
-    if (!checked) {
-      reset({ ...getValues(), technical_characteristics: undefined });
-    } else {
-      // register("technical_characteristics", { required: true });
-      // unregister(["technical_characteristics"]);
-    }
+    if (checked) return;
+
+    reset({ ...getValues(), technical_characteristics: car?.technical_characteristics || undefined });
   }, [checked]);
 
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
@@ -75,15 +78,15 @@ const CarForm: FC<Props> = ({ }) => {
     name: "options",
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    if (checked && !data.technical_characteristics.brand) setError("technical_characteristics.brand", { type: "required" });
-    if (checked && !data.technical_characteristics.model) setError("technical_characteristics.model", { type: "required" });
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    if (checked && data.technical_characteristics.brand?.length === 0) setError("technical_characteristics.brand", { type: "required" });
+    if (checked && data.technical_characteristics.model?.length === 0) setError("technical_characteristics.model", { type: "required" });
     if (checked && !data.technical_characteristics.productionYear) setError("technical_characteristics.productionYear", { type: "required" });
-    if (checked && !data.technical_characteristics.body) setError("technical_characteristics.body", { type: "required" });
+    if (checked && data.technical_characteristics.body?.length === 0) setError("technical_characteristics.body", { type: "required" });
     if (checked && !data.technical_characteristics.mileage) setError("technical_characteristics.mileage", { type: "required" });
 
-    else {
-      console.log(data);
+    if (areTechnicalCharacteristicsFilled(checked, data.technical_characteristics)) {
+      await requestFn(data as CarWithoutId);
     }
   }
 
@@ -117,25 +120,25 @@ const CarForm: FC<Props> = ({ }) => {
           />
           <ControlledTextField
             control={control}
-            name="photos.[0]"
+            name="images.[0]"
             label="Фото"
             placeholder="Фото"
             defaultValue=""
-            isInvalid={!!errors.photos?.[0]?.type}
+            isInvalid={!!errors.images?.[0]?.type}
           />
           <ControlledTextField
             control={control}
-            name="photos.[1]"
+            name="images.[1]"
             placeholder="Фото"
             defaultValue=""
-            isInvalid={!!errors.photos?.[1]?.type}
+            isInvalid={!!errors.images?.[1]?.type}
           />
           <ControlledTextField
             control={control}
-            name="photos.[2]"
+            name="images.[2]"
             placeholder="Фото"
             defaultValue=""
-            isInvalid={!!errors.photos?.[2]?.type}
+            isInvalid={!!errors.images?.[2]?.type}
           />
           <ControlledTextField
             control={control}
@@ -145,7 +148,7 @@ const CarForm: FC<Props> = ({ }) => {
             defaultValue=""
             isInvalid={!!errors.contacts?.type}
           />
-          <Form.Check label="Добавить тех. хар-ки" onChange={() => setChecked(prev => !prev)} />
+          <Form.Check label="Добавить тех. хар-ки" checked={checked} onChange={() => setChecked(prev => !prev)} />
           {
             checked && <>
               <ControlledTextField

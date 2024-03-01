@@ -1,5 +1,4 @@
-export interface ITechnicalCharachteristics {
-  car_id: number;
+export interface ITechnicalCharacteristics {
   brand: string;
   model: string;
   productionYear: number;

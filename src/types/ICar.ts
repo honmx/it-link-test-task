@@ -1,5 +1,5 @@
 import { IOption } from "./IOptions";
-import { ITechnicalCharachteristics } from "./ITechnicalCharachteristics";
+import { ITechnicalCharacteristics } from "./ITechnicalCharachteristics";
 
 export interface ICar {
   id: number;
@@ -8,6 +8,6 @@ export interface ICar {
   description: string;
   price: number;
   contacts: string;
-  technical_charachteristics?: ITechnicalCharachteristics;
+  technical_characteristics?: ITechnicalCharacteristics;
   options?: IOption[];
 }

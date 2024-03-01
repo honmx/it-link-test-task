@@ -11,30 +11,42 @@ import { CarWithoutId } from "@/types/CarWithoutId";
 import { ICar } from "@/types/ICar";
 import { INextPageWithLayout } from "@/types/INextPageWithLayout";
 import { useRouter } from "next/router";
-import { Button, Stack } from "react-bootstrap";
+import { Button, Spinner, Stack } from "react-bootstrap";
 
 interface Props {
 
 }
 
-const CreatePage: INextPageWithLayout<Props> = ({ }) => {
+const UpdatePage: INextPageWithLayout<Props> = ({ }) => {
 
-  const { push } = useRouter();
+  const { query, isReady, push } = useRouter();
 
-  const handleCreateClick = async (newCar: CarWithoutId) => {
-    await carsService.createCar(newCar);
+  const { data: car, isLoading, error } = useRequest(() => carsService.getCarById(query.id?.toString() as string), undefined, [isReady], !isReady || !query.id);
+
+  const handleUpdateClick = async (newCar: CarWithoutId) => {
+    if (!car) return;
+
+    await carsService.updateCar(car.id, { id: car.id, ...newCar });
     push("/");
   }
 
   return (
     <SingleCarItemWrapper>
       <Button as="a" href="/" style={{ marginRight: "auto" }}>Назад</Button>
-      <CarForm requestFn={(car: CarWithoutId) => handleCreateClick(car)} />
+      {
+        car && <CarForm car={car} requestFn={(car: CarWithoutId) => handleUpdateClick(car)} />
+      }
+      {
+        isLoading && <Spinner style={{ margin: "0 auto" }} />
+      }
+      {
+        error && <p style={{ textAlign: "center" }}>Элемент не найден</p>
+      }
     </SingleCarItemWrapper>
   )
 };
 
-CreatePage.getLayout = (page) => {
+UpdatePage.getLayout = (page) => {
   return (
     <Layout
       renderHeader={() => <Header />}
@@ -45,4 +57,4 @@ CreatePage.getLayout = (page) => {
   )
 }
 
-export default CreatePage;
+export default UpdatePage;
